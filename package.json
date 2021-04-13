@@ -6,8 +6,8 @@
   "scripts": {
     "start": "node backend/server.js",
     "server": "nodemon backend/server",
-    "client":"npm start --prefix frontend",
-    "dev":"concurrently \"npm run server\" \"npm run client\""
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/PmXcD/proShop-pmXcd#readme",
   "dependencies": {
+    "dotenv": "^8.2.0",
     "express": "^4.17.1"
   },
   "devDependencies": {
