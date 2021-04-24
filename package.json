@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "MERN practice project",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "start": "node backend/server.js",
     "server": "nodemon backend/server",
@@ -21,7 +22,8 @@
   "homepage": "https://github.com/PmXcD/proShop-pmXcd#readme",
   "dependencies": {
     "dotenv": "^8.2.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongoose": "^5.12.5"
   },
   "devDependencies": {
     "concurrently": "^6.0.2",
