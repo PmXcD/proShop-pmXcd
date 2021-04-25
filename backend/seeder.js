@@ -1,12 +1,12 @@
-const mongoose = require('mongoose')
-const dotenv = require('dotenv')
-const colors = require('colors')
-const users = require('./data/users')
-const products = require('./data/products')
-const User = require('./modals/userModal')
-const Product = require('./modals/productModal')
-const Order = require('./modals/orderModal')
-const connectDB = require('./config/db')
+import mongoose from 'mongoose'
+import dotenv from 'dotenv'
+import colors from 'colors'
+import users from './data/users.js'
+import products from './data/products.js'
+import User from './modals/userModa.js'
+import Product from './modals/productModal.js'
+import Order from './modals/orderModal.js'
+import connectDB from './config/db.js'
 
 dotenv.config()
 

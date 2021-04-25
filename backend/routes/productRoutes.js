@@ -1,6 +1,6 @@
-const express = require('express')
-const asyncHandler = require('express-async-handler')
-const Product = require('../modals/productModal')
+import express from 'express';
+import asyncHandler from 'express-async-handler';
+import Product from '../modals/productModal.js';
 
 const router = express.Router()
 
@@ -14,8 +14,9 @@ router.get('/:id', asyncHandler(async(req, res) => {
     if(product){
         res.json(product)
     } else {
-        res.status(404).json({message: 'Product not found'})
+        res.status(404)
+        throw new Error('Product not found!')
     }
 }))
 
-module.exports = router
+export default router
