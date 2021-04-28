@@ -75,7 +75,6 @@ const ProductScreen = ({ history, match }) => {
                                         <Row>
                                             <Col>Qty</Col>
                                             <Col>
-                                            {console.log(qty)}
                                             <Form.Control as='select' value={qty} onChange={(e) => setQty(e.target.value)}>
                                                 {
                                                     [...Array(product.countInStock).keys()].map( x => (
