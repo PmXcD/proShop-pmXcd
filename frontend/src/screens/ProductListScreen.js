@@ -4,30 +4,39 @@ import { Table, Button, Row, Col } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
-import { USER_LIST_RESET } from '../constants/userConstants';
-import { listProducts, deleteProduct } from '../actions/productActions';
+import { listProducts, deleteProduct, createProduct } from '../actions/productActions';
+import { PRODUCT_CREATE_RESET } from '../constants/productConstants';
 
 const ProductListScreen = ({history}) => {
 
     const dispatch = useDispatch()
 
     const productList = useSelector(state => state.productList)
-    const { loading, products, error} = productList
+    const { loading, products, error } = productList
+
+    const productCreate = useSelector(state => state.productCreate)
+    const { loading: loadingCreate, success:successCreate, product:createdProduct , error: errorCreate } = productCreate
 
     const productDelete = useSelector(state => state.productDelete)
-    const { loading: loadingDelete, success:successDelete} = productDelete
+    const { loading: loadingDelete, error: errorDelete, success:successDelete } = productDelete
 
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
     
     useEffect(() => {
-        if (userInfo && userInfo.isAdmin){
-            dispatch(listProducts())
-        } else {
-            dispatch({type: USER_LIST_RESET})
+
+        if(!userInfo.isAdmin){
             history.push('/login')
         }
-    },[dispatch, history, userInfo, successDelete])
+
+        dispatch({type: PRODUCT_CREATE_RESET})
+        
+        if (successCreate){
+            history.push(`/admin/product/${createdProduct._id}/edit`)
+        } else {
+            dispatch(listProducts())
+        }
+    },[dispatch, history, userInfo, successDelete, successCreate, createdProduct])
 
     const deleteHandler = (id) => {
         if(window.confirm("Are you sure?"))
@@ -35,7 +44,7 @@ const ProductListScreen = ({history}) => {
     }
 
     const createProductHandler = () => {
-        // Create Product screen
+        dispatch(createProduct())
     }
 
   return (
@@ -50,6 +59,10 @@ const ProductListScreen = ({history}) => {
             </Button>
         </Col>
     </Row>
+        { loadingCreate && <Loader /> }
+        { errorCreate && <Message variant={'danger'}>{errorCreate}</Message> }
+        { loadingDelete && <Loader /> }
+        { errorDelete && <Message variant={'danger'}>{errorDelete}</Message> }
         { loading ? <Loader /> : error ? <Message variant={'danger'}>{error}</Message> : (
             <Table responsive bordered striped hover className='table-sm'>
                 <thead>
