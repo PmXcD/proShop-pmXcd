@@ -45,7 +45,7 @@ const OrderScreen = ({ match }) => {
                 setSdkReady(true)
             }
         }
-    },[dispatch, orderId, order, successPay])    
+    },[dispatch, orderId, order, successPay, match])    
 
     if(!loading){
     //add decimal
